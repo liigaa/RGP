@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Unit>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index Unit</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Zemes īpašnieki</h2>
+        </div>
+        <div class="col-6">
+            <a asp-controller="User" asp-action="" class="btn btn-primary">
+                Pievienot zemes īpašnieku
+            </a>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>
+                Vārds, Uzvārds/Nosaukums
+            </th>
+            <th>
+                Izmantošanas veids
+            </th>
+            <th>
+                platība
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td width="30%">
+                    @obj.User.FullName
+                </td>
+                <td width="30%">
+                    @obj.LandType
+                </td>
+                <td width="20%">
+                    @obj.Area
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
