@@ -12,7 +12,7 @@ using RgpWeb.Data;
 namespace RgpWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221027172623_Init")]
+    [Migration("20221030150841_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,8 @@ namespace RgpWeb.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PropertyStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -66,17 +65,11 @@ namespace RgpWeb.Migrations
                     b.Property<float>("Area")
                         .HasColumnType("real");
 
-                    b.Property<int>("LandType")
-                        .HasColumnType("int");
-
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SurveyDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<float>("TypeArea")
-                        .HasColumnType("real");
 
                     b.Property<string>("UnitNumber")
                         .IsRequired()
@@ -95,6 +88,35 @@ namespace RgpWeb.Migrations
                     b.ToTable("Units");
                 });
 
+            modelBuilder.Entity("RgpWeb.Models.UnitUseTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("LandType")
+                        .HasColumnType("int");
+
+                    b.Property<float>("TypeArea")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UnitId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UnitUseTypes");
+                });
+
             modelBuilder.Entity("RgpWeb.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -111,9 +133,8 @@ namespace RgpWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -146,6 +167,25 @@ namespace RgpWeb.Migrations
                         .IsRequired();
 
                     b.Navigation("Property");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RgpWeb.Models.UnitUseTypes", b =>
+                {
+                    b.HasOne("RgpWeb.Models.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RgpWeb.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
 
                     b.Navigation("User");
                 });
