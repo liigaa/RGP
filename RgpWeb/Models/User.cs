@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RgpWeb.Enums;
 
 namespace RgpWeb.Models
 {
@@ -8,6 +9,6 @@ namespace RgpWeb.Models
         public string FullName { get; set; }
         [Required]
         public string RegNumber { get; set; }
-        public string Type { get; set; }
+        public UserType UserType { get; set; }
     }
 }

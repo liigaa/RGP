@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RgpWeb.Data;
+using RgpWeb.ServiceInterfaces;
 
 namespace RgpWeb.Controllers
 {
     public class UserController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUserService _userService;
 
-        public UserController(AppDbContext context)
+        public UserController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
 
         public IActionResult Index()
         {
-            var objUserList = _context.Users.ToList();
+            var objUserList = _userService.GetUserAndTotalLandArea();
 
             return View(objUserList);
         }

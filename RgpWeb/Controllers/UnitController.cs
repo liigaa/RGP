@@ -15,8 +15,8 @@ namespace RgpWeb.Controllers
         public IActionResult Index()
         {
 
-            var units = _context.Units.DistinctBy(id => id.User.Id).Include(user => user.User).ToList();
-            return View(units);
+            var users = _context.Users.ToList();
+            return View(users);
         }
     }
 }

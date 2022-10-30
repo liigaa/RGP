@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RgpWeb.Enums;
 
 namespace RgpWeb.Models
 {
@@ -8,8 +9,6 @@ namespace RgpWeb.Models
         public string UnitNumber { get; set; }
         public float Area { get; set; }
         public DateTime SurveyDate { get; set; }
-        public LandTypeEnum LandType { get; set; }
-        public float TypeArea { get; set; }
         public Property Property { get; set; }
         public User User { get; set; }
     }

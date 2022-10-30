@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RgpWeb.Enums;
 
 namespace RgpWeb.Models
 {
@@ -8,7 +9,7 @@ namespace RgpWeb.Models
         public string Title { get; set; }
         [Required, StringLength(11)]
         public string PropertyNumber { get; set; }
-        public string Status { get; set; }
+        public PropertyStatus PropertyStatus { get; set; }
         public User User { get; set; }
     }
 }

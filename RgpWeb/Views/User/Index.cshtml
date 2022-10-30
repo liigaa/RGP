@@ -1,4 +1,4 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<UserRequest>
 @{
     ViewData["Title"] = "Index";
 }
@@ -23,10 +23,7 @@
             Vārds, Uzvārds/Nosaukums
         </th>
         <th>
-            Personas kods/Reģistrācijas Nr.
-        </th>
-        <th>
-            Tips
+           Īpašuma kopplatība
         </th>
     </tr>
     </thead>
@@ -35,14 +32,12 @@
     {
         <tr>
             <td width="30%">
-                @obj.FullName
+                @obj.UserName
             </td>
             <td width="30%">
-                @obj.RegNumber
+                @obj.LandArea
             </td>
-            <td width="20%">
-                @obj.Type
-            </td>
+            
         </tr>
     }
     </tbody>
