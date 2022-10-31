@@ -5,17 +5,17 @@ namespace RgpWeb.Enums
     public enum LandTypeEnum
     {
         [Display(Name = "Lauksaimniecībā izmantojamā zeme")]
-        LauksaimniecibasZeme,
+        LauksaimniecibasZeme = 0,
         [Display(Name = "Mežs")]
-        Mezs,
-        Purvs,
+        Mezs = 1,
+        Purvs = 2,
         [Display(Name = "Zeme zem ūdeņiem")]
-        ZemUdeniem,
+        ZemUdeniem = 3,
         [Display(Name = "Zeme zem ēkām un pagalmiem")]
-        ZemEkam,
+        ZemEkam = 4,
         [Display(Name = "Zeme zem ceļiem")]
-        ZemCeliem,
+        ZemCeliem = 5,
         [Display(Name = "Pārējās zemes")]
-        Pareja
+        Pareja = 6
     }
 }

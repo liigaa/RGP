@@ -5,12 +5,12 @@ namespace RgpWeb.Enums
     public enum PropertyStatus
     {
         [Display(Name = "Ir pirkšanas līgums")]
-        IrPirksanasLigums,
+        IrPirksanasLigums = 0,
         [Display(Name = "Apmaksāts")]
-        Apmaksats,
+        Apmaksats = 1,
         [Display(Name = "Reģistrēts zemes grāmatā")]
-        RegistretsZemesGramata,
+        RegistretsZemesGramata = 2,
         [Display(Name = "Pārdots")]
-        Pardots
+        Pardots = 3
     }
 }

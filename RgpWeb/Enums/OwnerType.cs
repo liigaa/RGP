@@ -5,8 +5,8 @@ namespace RgpWeb.Enums
     public enum OwnerType
     {
         [Display(Name = "Fiziska persona")]
-        FiziskaPersona,
+        FiziskaPersona = 0,
         [Display(Name = "Juridiska persona")]
-        JuridiskaPersona
+        JuridiskaPersona = 1
     }
 }

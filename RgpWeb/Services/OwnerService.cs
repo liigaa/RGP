@@ -18,17 +18,9 @@ namespace RgpWeb.Services
 
             foreach (var owner in userList)
             {
-                try
-                {
-                    var area = _context.Units.Where(unit => unit.Owner.Id == owner.Id).Sum(unit => unit.Area);
+                var area = _context.Units.Where(unit => unit.Owner.Id == owner.Id).Sum(unit => unit.Area);
 
-                    userListWithArea.Add(new OwnerRequest(owner.Id, owner.FullName, area));
-                }
-                catch
-                {
-                    userListWithArea.Add(new OwnerRequest(owner.Id, owner.FullName, 0));
-                }
-                
+                userListWithArea.Add(new OwnerRequest(owner.Id, owner.FullName, area));
             }
 
             return userListWithArea;
