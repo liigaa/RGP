@@ -6,10 +6,8 @@ namespace RgpWeb.Services
 {
     public class OwnerService : EntityService<Owner>, IOwnerService
     {
-        private readonly IUnitService _unitService;
         public OwnerService(IAppDbContext context) : base(context)
         {
-            _unitService = new UnitService(context);
         }
 
         public IEnumerable<OwnerRequest> GetUserAndTotalLandArea()

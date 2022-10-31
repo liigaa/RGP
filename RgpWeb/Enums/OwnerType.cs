@@ -7,6 +7,6 @@ namespace RgpWeb.Enums
         [Display(Name = "Fiziska persona")]
         FiziskaPersona,
         [Display(Name = "Juridiska persona")]
-        JuridiskaPerson
+        JuridiskaPersona
     }
 }

@@ -8,12 +8,15 @@
         <div class="col-6">
             <h2 class="text-primary">Zemes īpašnieki</h2>
         </div>
-        <div class="col-6">
-            <a asp-controller="Owner" asp-action="" class="btn btn-primary">
+        <div class="col-6 text-end
+">
+            <a asp-controller="Owner" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;
                 Pievienot zemes īpašnieku
             </a>
         </div>
     </div>
+    <br/> <br/>
 
 
 <table class="table table-bordered table-striped" style="width: 100%">
@@ -23,8 +26,10 @@
             Vārds, Uzvārds/Nosaukums
         </th>
         <th>
-           Īpašuma kopplatība
+            Īpašuma kopplatība
         </th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -37,8 +42,19 @@
             <td width="30%">
                 @obj.LandArea
             </td>
-            
-        </tr>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-contoller="Owner" asp-action="Edit" asp-route-id="@obj.Id"
+                       class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
+                </div>
+            </td>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-contoller="Owner" asp-action="Redirect" asp-route-id="@obj.Id"
+                       class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Skatīt</a>
+                </div>
+            </td>
+            </tr>
     }
     </tbody>
 </table>

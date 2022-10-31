@@ -19,6 +19,7 @@ builder.Services.AddScoped<IEntityService<Owner>, EntityService<Owner>>();
 builder.Services.AddScoped<IEntityService<Unit>, EntityService<Unit>>();
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 
 var app = builder.Build();
