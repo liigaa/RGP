@@ -1,5 +1,4 @@
 ﻿using RgpWeb.Models;
-
 namespace RgpWeb.ServiceInterfaces;
 
 public interface IDbService

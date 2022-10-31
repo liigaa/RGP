@@ -3,11 +3,11 @@ using RgpWeb.ServiceInterfaces;
 
 namespace RgpWeb.Controllers
 {
-    public class UserController : Controller
+    public class OwnerController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IOwnerService _userService;
 
-        public UserController(IUserService userService)
+        public OwnerController(IOwnerService userService)
         {
             _userService = userService;
         }

@@ -15,7 +15,7 @@ namespace RgpWeb.Controllers
         public IActionResult Index()
         {
 
-            var users = _context.Users.ToList();
+            var users = _context.Owners.ToList();
             return View(users);
         }
     }

@@ -9,7 +9,7 @@ namespace RgpWeb.Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Owner> Owners { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<UnitUseTypes> UnitUseTypes { get; set; }

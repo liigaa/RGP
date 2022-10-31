@@ -10,6 +10,6 @@ namespace RgpWeb.Models
         [Required, StringLength(11)]
         public string PropertyNumber { get; set; }
         public PropertyStatus PropertyStatus { get; set; }
-        public User User { get; set; }
+        public Owner Owner { get; set; }
     }
 }

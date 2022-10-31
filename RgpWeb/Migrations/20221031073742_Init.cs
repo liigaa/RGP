@@ -10,18 +10,18 @@ namespace RgpWeb.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Owners",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RegNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserType = table.Column<int>(type: "int", nullable: false)
+                    OwnerType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Owners", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,15 +33,15 @@ namespace RgpWeb.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PropertyNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     PropertyStatus = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    OwnerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Properties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Properties_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Properties_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -53,26 +53,26 @@ namespace RgpWeb.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UnitNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Area = table.Column<float>(type: "real", nullable: false),
+                    Area = table.Column<double>(type: "float", nullable: false),
                     SurveyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PropertyId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    OwnerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Units", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Units_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Units_Properties_PropertyId",
                         column: x => x.PropertyId,
                         principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Units_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,32 +81,37 @@ namespace RgpWeb.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
                     LandType = table.Column<int>(type: "int", nullable: false),
-                    TypeArea = table.Column<float>(type: "real", nullable: false)
+                    TypeArea = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UnitUseTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UnitUseTypes_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_UnitUseTypes_Units_UnitId",
                         column: x => x.UnitId,
                         principalTable: "Units",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UnitUseTypes_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Properties_UserId",
+                name: "IX_Properties_OwnerId",
                 table: "Properties",
-                column: "UserId");
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Units_OwnerId",
+                table: "Units",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Units_PropertyId",
@@ -114,19 +119,14 @@ namespace RgpWeb.Migrations
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Units_UserId",
-                table: "Units",
-                column: "UserId");
+                name: "IX_UnitUseTypes_OwnerId",
+                table: "UnitUseTypes",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UnitUseTypes_UnitId",
                 table: "UnitUseTypes",
                 column: "UnitId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UnitUseTypes_UserId",
-                table: "UnitUseTypes",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -141,7 +141,7 @@ namespace RgpWeb.Migrations
                 name: "Properties");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Owners");
         }
     }
 }

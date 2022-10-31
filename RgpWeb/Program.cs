@@ -15,10 +15,10 @@ builder.Services.AddDbContext<AppDbContext>(options
 
 builder.Services.AddScoped<IAppDbContext, AppDbContext>();
 builder.Services.AddScoped<IDbService, DbService>();
-builder.Services.AddScoped<IEntityService<User>, EntityService<User>>();
+builder.Services.AddScoped<IEntityService<Owner>, EntityService<Owner>>();
 builder.Services.AddScoped<IEntityService<Unit>, EntityService<Unit>>();
 builder.Services.AddScoped<IUnitService, UnitService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOwnerService, OwnerService>();
 
 
 var app = builder.Build();

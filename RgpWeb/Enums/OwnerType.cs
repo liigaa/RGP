@@ -2,7 +2,7 @@
 
 namespace RgpWeb.Enums
 {
-    public enum UserType
+    public enum OwnerType
     {
         [Display(Name = "Fiziska persona")]
         FiziskaPersona,

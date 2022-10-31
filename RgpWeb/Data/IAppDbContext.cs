@@ -8,7 +8,7 @@ public interface IAppDbContext
 {
     DbSet<T> Set<T>() where T : class;
     EntityEntry<T> Entry<T>(T entity) where T : class;
-    DbSet<User> Users { get; set; }
+    DbSet<Owner> Owners { get; set; }
     DbSet<Property> Properties { get; set; }
     DbSet<Unit> Units { get; set; }
     DbSet<UnitUseTypes> UnitUseTypes { get; set; }

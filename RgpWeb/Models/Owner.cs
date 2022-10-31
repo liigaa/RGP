@@ -3,12 +3,12 @@ using RgpWeb.Enums;
 
 namespace RgpWeb.Models
 {
-    public class User : Entity
+    public class Owner : Entity
     {
         [Required]
         public string FullName { get; set; }
         [Required]
         public string RegNumber { get; set; }
-        public UserType UserType { get; set; }
+        public OwnerType OwnerType { get; set; }
     }
 }

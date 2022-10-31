@@ -4,9 +4,9 @@ namespace RgpWeb.Models
 {
     public class UnitUseTypes : Entity
     {
-        public User User { get; set; }
+        public Owner Owner { get; set; }
         public Unit Unit { get; set; }
         public LandTypeEnum LandType { get; set; }
-        public float TypeArea { get; set; }
+        public double TypeArea { get; set; }
     }
 }

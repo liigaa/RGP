@@ -1,4 +1,4 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<Owner>
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,7 +11,7 @@
             <h2 class="text-primary">Īpašumi</h2>
         </div>
         <div class="col-6">
-            <a asp-controller="User" asp-action="" class="btn btn-primary">
+            <a asp-controller="Owner" asp-action="" class="btn btn-primary">
                 Pievienot zemes īpašnieku
             </a>
         </div>
@@ -37,11 +37,8 @@
                 <td width="30%">
                     @obj.FullName
                 </td>
-                <td width="30%">
-                   
-                </td>
                 <td width="20%">
-                    @obj.UserType
+                    @obj.OwnerType
                 </td>
             </tr>
         }
