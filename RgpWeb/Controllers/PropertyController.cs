@@ -16,7 +16,6 @@ namespace RgpWeb.Controllers
         public IActionResult Index(int id)
         {
             var ownerProperties = _propertyService.GetPropertiesByOwnerId(id);
-
             return View(ownerProperties);
         }
 
@@ -26,16 +25,22 @@ namespace RgpWeb.Controllers
             return View();
         }
 
+        //GET
+        public IActionResult Redirect(int id)
+        {
+            return RedirectToAction("Index", "Property", new { id });
+        }
+
         //POST
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(Owner owner)
-        //{
-        //    if (!ModelState.IsValid) return View(owner);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Property property)
+        {
+            if (!ModelState.IsValid) return View(property);
 
-        //    _propertyService.Create(owner);
+            _propertyService.Create(property);
 
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
     }
 }

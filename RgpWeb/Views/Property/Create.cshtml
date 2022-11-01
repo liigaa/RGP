@@ -2,7 +2,6 @@
 @model Property
 
 <form method="post">
-    <input asp-for="Owner.Id" hidden/>
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Pievienot īpašumu</h2>
@@ -21,14 +20,15 @@
         <div class="mb-3">
             <label asp-for="PropertyStatus">Status</label>
             @Html.DropDownListFor(m => m.PropertyStatus,
-                new SelectList(Enum.GetValues(typeof(OwnerType))),
+                new SelectList(Enum.GetValues(typeof(PropertyStatus))),
                 "Izvēlēties",
                 new { @class = "form-control" })
             <span asp-validation-for="PropertyStatus" class="text-danger"></span>
         </div>
+        @Html.HiddenFor(p => p.Owner.Id)
         <br/>
         <button type="submit" class="btn btn-primary" style="width: 150px">Pievienot</button>
-        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" style="width: 150px">Atgriezties</a>
+        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="Owner.Id" style="width: 150px">Atgriezties</a>
     </div>
 </form>
 
