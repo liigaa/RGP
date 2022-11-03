@@ -29,15 +29,10 @@
             {
                 @class = "col-form-label"
             })
-            @Html.DropDownListFor(x => x.PropertyStatus, 
-                (from PropertyStatus propertyStatus in Enum.GetValues(typeof(PropertyStatus)) 
-                select new SelectListItem(){Value = ((int) propertyStatus).ToString(),Text =propertyStatus.ToString()}),
-                "Izvēlēties", new { @class = "form-control"})
-            
-            @*@Html.DropDownListFor(m => m.PropertyStatus,
+            @Html.DropDownListFor(m => m.PropertyStatus,
                 new SelectList(Enum.GetValues(typeof(PropertyStatus))),
                 "Izvēlēties",
-                new { @class = "form-control"})*@
+                new { @class = "form-control"})
             @Html.ValidationMessageFor(m => m.PropertyStatus,null, new { @class ="text-danger"})
         </div>
         @Html.HiddenFor(p => p.OwnerId)

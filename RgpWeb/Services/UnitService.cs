@@ -1,4 +1,5 @@
-﻿using RgpWeb.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RgpWeb.Data;
 using RgpWeb.Enums;
 using RgpWeb.Models;
 using RgpWeb.ServiceInterfaces;
@@ -16,7 +17,7 @@ namespace RgpWeb.Services
         public IEnumerable<UnitListModel> GetUnits(int id)
         {
             var propertyUnits = new List<UnitListModel>();
-            var property = _propertyService.GetById(id);
+            var property = _propertyService.GetPropertyWithOwnerByPropertyId(id);
             var ownerId = property.Owner.Id;
             var unitList = _context.Units.Where(unit => unit.Property.Id == id).ToList();
 
@@ -62,11 +63,12 @@ namespace RgpWeb.Services
 
         public UnitViewModel UnitsWithPropertyId(int id)
         {
-            var property = _propertyService.GetById(id);
+            var property = _propertyService.GetPropertyWithOwnerByPropertyId(id);
 
             return new UnitViewModel
             {
                 PropertyId = id,
+                OwnerId = property.Owner.Id,
                 PropertyName = property.Title,
                 UnitList = GetUnits(id)
             };

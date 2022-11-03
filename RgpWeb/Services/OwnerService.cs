@@ -23,7 +23,7 @@ namespace RgpWeb.Services
                 userListWithArea.Add(new OwnerRequestModel(owner.Id, owner.FullName, area));
             }
 
-            return userListWithArea;
+            return userListWithArea.OrderBy(user => user.OwnerName);
         }
     } 
 }

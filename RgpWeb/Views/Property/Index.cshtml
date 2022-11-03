@@ -6,10 +6,9 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Īpašumi</h2>
+            <h2 class="text-primary"> @Model.OwnerName īpašumi</h2>
         </div>
-        <div class="col-6 text-end
-">
+        <div class="col-6 text-end">
             <a href="@Url.Action("Create", "Property", new {id = Model.OwnerId})"  class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp;
                 Pievienot īpašumu

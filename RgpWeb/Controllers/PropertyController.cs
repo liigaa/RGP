@@ -54,7 +54,7 @@ namespace RgpWeb.Controllers
         //GET
         public IActionResult Edit(int id)
         {
-            var objProperty = _propertyService.GetById(id);
+            var objProperty = _propertyService.GetPropertyWithOwnerByPropertyId(id);
             return View(objProperty);
         }
 
@@ -67,7 +67,7 @@ namespace RgpWeb.Controllers
 
             _propertyService.Update(property);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {property.Owner.Id});
         }
 
         //GET

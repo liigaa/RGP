@@ -25,10 +25,13 @@
                 new {@class = "form-control"})
             <span asp-validation-for="PropertyStatus" class="text-danger"></span>
         </div>
-        @Html.HiddenFor(p => p.Owner)
+        @Html.HiddenFor(p => p.Owner.Id)
+        @Html.HiddenFor(p => p.Owner.FullName)
+        @Html.HiddenFor(p => p.Owner.OwnerType)
+        @Html.HiddenFor(p => p.Owner.RegNumber)
         <br/>
-        <button type="submit" class="btn btn-primary" style="width: 150px">Labot</button>
-        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.Owner.Id" style="width: 150px">Atgriezties</a>
+        <button type="submit" class="btn btn-primary" style="width: 150px" >Labot</button>
+        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.Id" style="width: 150px">Atgriezties</a>
     </div>
 </form>
 

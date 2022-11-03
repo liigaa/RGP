@@ -1,4 +1,5 @@
-﻿using RgpWeb.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using RgpWeb.Data;
 using RgpWeb.Models;
 using RgpWeb.ServiceInterfaces;
 
@@ -6,17 +7,27 @@ namespace RgpWeb.Services
 {
     public class PropertyService : EntityService<Property>, IPropertyService
     {
-        public PropertyService(IAppDbContext context) : base(context)
+        private readonly IOwnerService _ownerService;
+        public PropertyService(IAppDbContext context, IOwnerService ownerService) : base(context)
         {
+            _ownerService = ownerService;
         }
 
         public OwnerPropertyViewModel GetPropertiesByOwnerId(int id)
         {
+            var owner = _ownerService.GetById(id);
+
             return new OwnerPropertyViewModel
             {
                 OwnerId = id,
-                Properties = _context.Properties.Where(property => property.Owner.Id == id).ToList()
+                OwnerName = owner.FullName,
+                Properties = _context.Properties.Where(p => p.Owner.Id == id).ToList()
             };
+        }
+
+        public Property GetPropertyWithOwnerByPropertyId(int id)
+        {
+            return _context.Properties.Include(p => p.Owner).First(p => p.Id == id);
         }
     }
 }

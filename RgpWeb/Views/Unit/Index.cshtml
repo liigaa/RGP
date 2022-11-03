@@ -3,21 +3,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index Unit</h1>
-
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Īpašuma {@Model.PropertyName} zemes vienības</h2>
+            <h2 class="text-primary">Īpašuma @Model.PropertyName zemes vienības</h2>
         </div>
-        <div class="col-6">
-            <a href="@Url.Action("", "Unit", new {id = Model.PropertyId})"  class="btn btn-primary">
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Create", "Unit", new {id = Model.PropertyId})"  class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp;
                 Pievienot zemes vienību
             </a>
         </div>
     </div>
-
 
     <table class="table table-bordered table-striped" style="width: 100%">
         <thead>
@@ -89,8 +86,22 @@
                 <td width="10%">
                     @obj.ParejaArea
                 </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-contoller="Property" asp-action="" asp-route-id="@obj.UnitId"
+                           class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
+                    </div>
+                </td>
             </tr>
         }
         </tbody>
     </table>
+    <div class="row pt-4">
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Index", "Property", new {id = Model.OwnerId})"  class="btn btn-primary">
+                Atgriezties
+            </a>
+        </div>
+        <div class="col-6"></div>
+    </div>
 </div>
