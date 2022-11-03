@@ -10,9 +10,13 @@ namespace RgpWeb.Services
         {
         }
 
-        public IEnumerable<Property> GetPropertiesByOwnerId(int id)
+        public OwnerPropertyViewModel GetPropertiesByOwnerId(int id)
         {
-            return _context.Properties.Where(property => property.Owner.Id == id).ToList();
+            return new OwnerPropertyViewModel
+            {
+                OwnerId = id,
+                Properties = _context.Properties.Where(property => property.Owner.Id == id).ToList()
+            };
         }
     }
 }

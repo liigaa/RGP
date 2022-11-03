@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Property\" />
     <Folder Include="Views\Unit\" />
   </ItemGroup>
 

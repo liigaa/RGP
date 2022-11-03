@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Owner>
+﻿@model UnitViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -8,11 +8,12 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Īpašumi</h2>
+            <h2 class="text-primary">Īpašuma {@Model.PropertyName} zemes vienības</h2>
         </div>
         <div class="col-6">
-            <a asp-controller="Owner" asp-action="" class="btn btn-primary">
-                Pievienot zemes īpašnieku
+            <a href="@Url.Action("", "Unit", new {id = Model.PropertyId})"  class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;
+                Pievienot zemes vienību
             </a>
         </div>
     </div>
@@ -22,23 +23,71 @@
         <thead>
         <tr>
             <th>
-                Vārds, Uzvārds/Nosaukums
+                Kadastra apzīmējums
             </th>
             <th>
-                Tips
+                Kopplatība
+            </th>
+            <th>
+                Uzmērīšanas datums
+            </th>
+            <th>
+                Lauksaimniecībā izmantojamā zeme
+            </th>
+            <th>
+                Meža zeme
+            </th>
+            <th>
+                Purvs
+            </th>
+            <th>
+                Ūdens objektu zeme
+            </th>
+            <th>
+                Zeme zem ēkām un pagalmiem
+            </th>
+            <th>
+                Zeme zem ceļiem
+            </th>
+            <th>
+                Pārējā zeme
             </th>
             
         </tr>
         </thead>
         <tbody>
-        @foreach (var obj in Model)
+        @foreach (var obj in Model.UnitList)
         {
             <tr>
-                <td width="30%">
-                    @obj.FullName
+                <td width="10%">
+                    @obj.UnitNumber
                 </td>
-                <td width="20%">
-                    @obj.OwnerType
+                <td width="10%">
+                    @obj.Area
+                </td>
+                <td width="10%">
+                    @obj.SurveyDate
+                </td>
+                <td width="10%">
+                    @obj.LArea
+                </td>
+                <td width="10%">
+                    @obj.MArea
+                </td>
+                <td width="10%">
+                    @obj.PArea
+                </td>
+                <td width="10%">
+                    @obj.UArea
+                </td>
+                <td width="10%">
+                    @obj.EkPaArea
+                </td>
+                <td width="10%">
+                    @obj.CeluArea
+                </td>
+                <td width="10%">
+                    @obj.ParejaArea
                 </td>
             </tr>
         }

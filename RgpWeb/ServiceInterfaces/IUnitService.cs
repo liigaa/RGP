@@ -4,5 +4,7 @@ namespace RgpWeb.ServiceInterfaces
 {
     public interface IUnitService : IEntityService<Unit>
     {
+        IEnumerable<UnitListModel> GetUnits(int id);
+        UnitViewModel UnitsWithPropertyId(int id);
     }
 }

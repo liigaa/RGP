@@ -8,10 +8,12 @@ namespace RgpWeb.Controllers
     public class PropertyController : Controller
     {
         private readonly IPropertyService _propertyService;
+        private readonly IOwnerService _ownerService;
 
-        public PropertyController(IPropertyService propertyService)
+        public PropertyController(IPropertyService propertyService, IOwnerService ownerService)
         {
             _propertyService = propertyService;
+            _ownerService = ownerService;
         }
         public IActionResult Index(int id)
         {
@@ -20,27 +22,58 @@ namespace RgpWeb.Controllers
         }
 
         //GET
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
-        }
-
-        //GET
-        public IActionResult Redirect(int id)
-        {
-            return RedirectToAction("Index", "Property", new { id });
+            var model = new CreatePropertyViewModel
+            {
+                OwnerId = id
+            };
+            return View(model);
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Property property)
+        public IActionResult Create(CreatePropertyViewModel createPropertyRequest)
         {
-            if (!ModelState.IsValid) return View(property);
+            var property = new Property
+            {
+                PropertyStatus = createPropertyRequest.PropertyStatus,
+                PropertyNumber = createPropertyRequest.PropertyNumber,
+                Title = createPropertyRequest.PropertyName,
+                Owner = _ownerService.GetById(createPropertyRequest.OwnerId)
+            };
+
+            if (!ModelState.IsValid) return View(createPropertyRequest);
 
             _propertyService.Create(property);
 
+            return RedirectToAction("Index", "Property", new {@id = createPropertyRequest.OwnerId});
+        }
+
+        //GET
+        public IActionResult Edit(int id)
+        {
+            var objProperty = _propertyService.GetById(id);
+            return View(objProperty);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Property property)
+        {
+            if (!ModelState.IsValid) return View(property);
+
+            _propertyService.Update(property);
+
             return RedirectToAction("Index");
+        }
+
+        //GET
+        public IActionResult Redirect(int id)
+        {
+            return RedirectToAction("Index", "Unit", new { id });
         }
     }
 }

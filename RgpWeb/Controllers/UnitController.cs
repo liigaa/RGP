@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RgpWeb.Data;
+using RgpWeb.ServiceInterfaces;
 
 namespace RgpWeb.Controllers
 {
     public class UnitController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUnitService _unitService;
 
-        public UnitController(AppDbContext context)
+        public UnitController(IUnitService unitService)
         {
-            _context = context;
+            _unitService = unitService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-
-            var users = _context.Owners.ToList();
-            return View(users);
+            var unitObj = _unitService.UnitsWithPropertyId(id);
+            return View(unitObj);
         }
     }
 }

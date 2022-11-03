@@ -10,9 +10,9 @@ namespace RgpWeb.Services
         {
         }
 
-        public IEnumerable<OwnerRequest> GetUserAndTotalLandArea()
+        public IEnumerable<OwnerRequestModel> GetUserAndTotalLandArea()
         {
-            var userListWithArea = new List<OwnerRequest>();
+            var userListWithArea = new List<OwnerRequestModel>();
 
             var userList = GetAll();
 
@@ -20,7 +20,7 @@ namespace RgpWeb.Services
             {
                 var area = _context.Units.Where(unit => unit.Owner.Id == owner.Id).Sum(unit => unit.Area);
 
-                userListWithArea.Add(new OwnerRequest(owner.Id, owner.FullName, area));
+                userListWithArea.Add(new OwnerRequestModel(owner.Id, owner.FullName, area));
             }
 
             return userListWithArea;

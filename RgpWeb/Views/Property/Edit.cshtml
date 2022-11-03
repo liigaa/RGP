@@ -1,0 +1,39 @@
+﻿@using RgpWeb.Enums
+@model Property
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Labot zemes īpašuma datus</h2>
+            <hr/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title">Nosaukums</label>
+            <input asp-for="Title" class="form-control"/>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PropertyNumber">Kadastra Nr.</label>
+            <input asp-for="PropertyNumber" class="form-control"/>
+            <span asp-validation-for="PropertyNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PropertyStatus">Tips</label>
+            @Html.DropDownListFor(m => m.PropertyStatus, 
+                new SelectList(Enum.GetValues(typeof(PropertyStatus))), 
+                "Izvēlēties",
+                new {@class = "form-control"})
+            <span asp-validation-for="PropertyStatus" class="text-danger"></span>
+        </div>
+        @Html.HiddenFor(p => p.Owner)
+        <br/>
+        <button type="submit" class="btn btn-primary" style="width: 150px">Labot</button>
+        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.Owner.Id" style="width: 150px">Atgriezties</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+    }

@@ -1,5 +1,5 @@
 ﻿@using RgpWeb.Enums
-@model Property
+@model CreatePropertyViewModel
 
 <form method="post">
     <div class="border p-3 mt-4">
@@ -8,27 +8,42 @@
             <hr/>
         </div>
         <div class="mb-3">
-            <label asp-for="Title">Nosaukums</label>
-            <input asp-for="Title" class="form-control"/>
-            <span asp-validation-for="Title" class="text-danger"></span>
+            @Html.LabelFor(m => m.PropertyName, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.PropertyName, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.PropertyName, null, new {@class="text-danger"})
         </div>
         <div class="mb-3">
-            <label asp-for="PropertyNumber">Kadastra numurs</label>
-            <input asp-for="PropertyNumber" class="form-control"/>
-            <span asp-validation-for="PropertyNumber" class="text-danger"></span>
+            @Html.LabelFor(m => m.PropertyNumber, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.PropertyNumber, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.PropertyNumber,null, new { @class ="text-danger"})
         </div>
         <div class="mb-3">
-            <label asp-for="PropertyStatus">Status</label>
-            @Html.DropDownListFor(m => m.PropertyStatus,
+            @*<label asp-for="PropertyStatus">Status</label>*@
+            @Html.LabelFor(m => m.PropertyStatus, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.DropDownListFor(x => x.PropertyStatus, 
+                (from PropertyStatus propertyStatus in Enum.GetValues(typeof(PropertyStatus)) 
+                select new SelectListItem(){Value = ((int) propertyStatus).ToString(),Text =propertyStatus.ToString()}),
+                "Izvēlēties", new { @class = "form-control"})
+            
+            @*@Html.DropDownListFor(m => m.PropertyStatus,
                 new SelectList(Enum.GetValues(typeof(PropertyStatus))),
                 "Izvēlēties",
-                new { @class = "form-control" })
-            <span asp-validation-for="PropertyStatus" class="text-danger"></span>
+                new { @class = "form-control"})*@
+            @Html.ValidationMessageFor(m => m.PropertyStatus,null, new { @class ="text-danger"})
         </div>
-        @Html.HiddenFor(p => p.Owner.Id)
+        @Html.HiddenFor(p => p.OwnerId)
         <br/>
         <button type="submit" class="btn btn-primary" style="width: 150px">Pievienot</button>
-        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="Owner.Id" style="width: 150px">Atgriezties</a>
+        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.OwnerId" style="width: 150px">Atgriezties</a>
     </div>
 </form>
 

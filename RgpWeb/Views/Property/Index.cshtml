@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Property>
+﻿@model OwnerPropertyViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,7 +10,7 @@
         </div>
         <div class="col-6 text-end
 ">
-            <a asp-controller="Property" asp-action="Create"  class="btn btn-primary">
+            <a href="@Url.Action("Create", "Property", new {id = Model.OwnerId})"  class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp;
                 Pievienot īpašumu
             </a>
@@ -35,10 +35,10 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var obj in Model)
+        @foreach (var obj in Model.Properties)
         {
             <tr>
-                    @Html.HiddenFor(p => obj.Owner.Id)
+                @Html.HiddenFor(p => obj.Owner.Id)
                 <td width="30%">
                     @obj.Title
                 </td>
@@ -50,13 +50,13 @@
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-contoller="Property" asp-action="" asp-route-id="@obj.Id"
+                        <a asp-contoller="Property" asp-action="Edit" asp-route-id="@obj.Id"
                            class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
                     </div>
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-contoller="Property" asp-action="" asp-route-id="@obj.Id"
+                        <a asp-contoller="Property" asp-action="Redirect" asp-route-id="@obj.Id"
                            class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Skatīt</a>
                     </div>
                 </td>
@@ -64,5 +64,13 @@
         }
         </tbody>
     </table>
+    <div class="row pt-4">
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Index", "Owner")"  class="btn btn-primary">
+                Atgriezties
+            </a>
+        </div>
+        <div class="col-6"></div>
+    </div>
 </div>
 

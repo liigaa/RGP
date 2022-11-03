@@ -4,5 +4,5 @@ namespace RgpWeb.ServiceInterfaces;
 
 public interface IPropertyService : IEntityService<Property>
 {
-    IEnumerable<Property> GetPropertiesByOwnerId(int id);
+    OwnerPropertyViewModel GetPropertiesByOwnerId(int id);
 }
