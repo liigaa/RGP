@@ -1,7 +1,112 @@
-﻿
-@{
-    ViewData["Title"] = "Edit";
-}
+﻿@model UnitListModel
 
-<h1>Edit</h1>
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Labot zemes vienības datus</h2>
+            <hr/>
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UnitNumber, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.UnitNumber, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.UnitNumber, null, new {@class="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Area, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.Area, new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Area,null, new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.SurveyDate, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.SurveyDate, 
+                new { @type="date", @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.SurveyDate,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+
+            @Html.LabelFor(m => m.LArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.LArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.LArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.MArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.MArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.MArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.PArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.PArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.PArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.UArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.UArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.EkPaArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.EkPaArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.EkPaArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.CeluArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.CeluArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.CeluArea,"", new { @class ="text-danger"})
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.ParejaArea, new
+            {
+                @class = "col-form-label"
+            })
+            @Html.TextBoxFor(m => m.ParejaArea, 
+                new { @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ParejaArea,"", new { @class ="text-danger"})
+        </div>
+        @Html.HiddenFor(m => m.OwnerId)
+        @Html.HiddenFor(m => m.PropertyId)
+        @Html.HiddenFor(m => m.UnitId)
+        <br/>
+        <button type="submit" class="btn btn-primary" style="width: 150px">Saglabāt</button>
+        <a asp-controller="Unit" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.PropertyId" style="width: 150px">Atgriezties</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+    }
 

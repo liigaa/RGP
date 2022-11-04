@@ -6,5 +6,7 @@ namespace RgpWeb.ServiceInterfaces
     {
         IEnumerable<UnitListModel> GetUnits(int id);
         UnitViewModel UnitsWithPropertyId(int id);
+        UnitListModel GetUnitListModelByUnitId(int id);
+        Unit GetAllUnitById(int id);
     }
 }

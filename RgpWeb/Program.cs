@@ -17,10 +17,12 @@ builder.Services.AddScoped<IAppDbContext, AppDbContext>();
 builder.Services.AddScoped<IDbService, DbService>();
 builder.Services.AddScoped<IEntityService<Owner>, EntityService<Owner>>();
 builder.Services.AddScoped<IEntityService<Unit>, EntityService<Unit>>();
+builder.Services.AddScoped<IEntityService<Property>, EntityService<Property>>();
+builder.Services.AddScoped<IEntityService<UnitUseTypes>, EntityService<UnitUseTypes>>();
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IOwnerService, OwnerService>();
 builder.Services.AddScoped<IPropertyService, PropertyService>();
-
+builder.Services.AddScoped<IUnitUseTypesService, UnitUseTypesService>();
 
 var app = builder.Build();
 

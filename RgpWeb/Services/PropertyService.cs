@@ -8,9 +8,9 @@ namespace RgpWeb.Services
     public class PropertyService : EntityService<Property>, IPropertyService
     {
         private readonly IOwnerService _ownerService;
-        public PropertyService(IAppDbContext context, IOwnerService ownerService) : base(context)
+        public PropertyService(IAppDbContext context) : base(context)
         {
-            _ownerService = ownerService;
+            _ownerService = new OwnerService(context);
         }
 
         public OwnerPropertyViewModel GetPropertiesByOwnerId(int id)

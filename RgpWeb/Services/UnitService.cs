@@ -9,9 +9,9 @@ namespace RgpWeb.Services
     public class UnitService : EntityService<Unit>, IUnitService
     {
         private readonly IPropertyService _propertyService;
-        public UnitService(IAppDbContext context, IPropertyService propertyService) : base(context)
+        public UnitService(IAppDbContext context) : base(context)
         {
-            _propertyService = propertyService;
+            _propertyService = new PropertyService(context);
         }
 
         public IEnumerable<UnitListModel> GetUnits(int id)
@@ -72,6 +72,52 @@ namespace RgpWeb.Services
                 PropertyName = property.Title,
                 UnitList = GetUnits(id)
             };
+        }
+
+        public Unit GetAllUnitById(int id)
+        {
+            return _context.Units.Include(u => u.Owner)
+                .Include(u => u.Property).First(u => u.Id == id);
+        }
+
+        public UnitListModel GetUnitListModelByUnitId(int id)
+        {
+            var unit = GetAllUnitById(id);
+            var property = _propertyService.GetPropertyWithOwnerByPropertyId(unit.Property.Id);
+            var ownerId = property.Owner.Id;
+            
+
+            return new UnitListModel
+            {
+                OwnerId = ownerId,
+                PropertyId = property.Id,
+                UnitId = id,
+                UnitNumber = unit.UnitNumber,
+                SurveyDate = unit.SurveyDate,
+                Area = unit.Area,
+                LArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.LauksaimniecibasZeme)
+                    ?.TypeArea,
+                MArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.Mezs)
+                    ?.TypeArea,
+                PArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.Purvs)
+                    ?.TypeArea,
+                UArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.ZemUdeniem)
+                    ?.TypeArea,
+                EkPaArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.ZemEkam)
+                    ?.TypeArea,
+                CeluArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.ZemCeliem)
+                    ?.TypeArea,
+                ParejaArea = _context.UnitUseTypes.
+                    FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.Pareja)
+                    ?.TypeArea
+            };
+
         }
     }
 }
