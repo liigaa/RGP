@@ -34,6 +34,7 @@
         </div>
         @Html.HiddenFor(m => m.OwnerId)
         @Html.HiddenFor(m => m.PropertyId)
+        @Html.HiddenFor(m => m.PropertyName)
         <br/>
         <button type="submit" class="btn btn-primary" style="width: 150px">Pievienot</button>
         <a asp-controller="Unit" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.PropertyId" style="width: 150px">Atgriezties</a>

@@ -27,7 +27,7 @@
             {
                 @class = "col-form-label"
             })
-            @Html.TextBoxFor(m => m.SurveyDate, 
+            @Html.TextBoxFor(m => m.SurveyDate, "{0:MM/dd/yyyy}",
                 new { @type="date", @class = "form-control"})
             @Html.ValidationMessageFor(m => m.SurveyDate,"", new { @class ="text-danger"})
         </div>

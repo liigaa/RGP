@@ -16,6 +16,7 @@ namespace RgpWeb.Models
         [Required(ErrorMessage = "Ievadiet kopējo platību")]
         public double Area { get; set; }
         [Display(Name = "Uzmērīšanas datums")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime SurveyDate { get; set; }
     }
 }
