@@ -21,16 +21,9 @@ namespace RgpWeb.Services
 
             if (unit != null)
             {
-                var newUnitUseType = new UnitUseTypes
-                {
-                    Id = unit.Id,
-                    Owner = unit.Owner,
-                    Unit = unit.Unit,
-                    LandType = unit.LandType,
-                    TypeArea = type.TypeArea
-                };
+                unit.TypeArea = type.TypeArea;
 
-                Update(newUnitUseType);
+                Update(unit);
             }
             else
             {

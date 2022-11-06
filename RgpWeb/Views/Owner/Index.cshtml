@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<OwnerRequestModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Īpašnieki";
 }
 
 <div class="container p-3">
@@ -8,9 +8,8 @@
         <div class="col-6">
             <h2 class="text-primary">Zemes īpašnieki</h2>
         </div>
-        <div class="col-6 text-end
-">
-            <a asp-controller="Owner" asp-action="Create" class="btn btn-primary">
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Create", "Owner")" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> &nbsp;
                 Pievienot zemes īpašnieku
             </a>
@@ -23,13 +22,11 @@
     <thead>
     <tr>
         <th>
-            Vārds, Uzvārds/Nosaukums
+            @Html.DisplayNameFor(model => model.OwnerName)
         </th>
         <th>
-            Īpašuma kopplatība
+            @Html.DisplayNameFor(model => model.LandArea)
         </th>
-        <th></th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -37,21 +34,21 @@
     {
         <tr>
             <td width="30%">
-                @obj.OwnerName
+                @Html.DisplayFor(m => obj.OwnerName)
             </td>
             <td width="30%">
-                @obj.LandArea
+                @Html.DisplayFor(m => obj.LandArea)
             </td>
             <td>
                 <div class="w-75 btn-group" role="group">
-                    <a asp-contoller="Owner" asp-action="Edit" asp-route-id="@obj.Id"
-                       class="btn btn-secondary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
+                    <a href="@Url.Action("Edit", "Owner", new {id = obj.Id})"
+                       class="btn mx-2" style="background-color: #e6c371"><i class="bi bi-pencil-square"></i>Labot</a>
                 </div>
             </td>
             <td>
                 <div class="w-75 btn-group" role="group">
-                    <a asp-contoller="Owner" asp-action="Redirect" asp-route-id="@obj.Id"
-                       class="btn btn-info mx-2"><i class="bi bi-eye"></i>Skatīt</a>
+                    <a href="@Url.Action("Redirect", "Owner", new {id = obj.Id})"
+                       class="btn btn-info mx-2" style="background-color: #95bab8; border: none"><i class="bi bi-list"></i>Skatīt</a>
                 </div>
             </td>
             </tr>

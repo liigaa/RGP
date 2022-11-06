@@ -20,36 +20,35 @@
         <thead>
         <tr>
             <th>
-                Kadastra apzīmējums
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.UnitNumber)
             </th>
             <th>
-                Kopplatība
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.Area)
             </th>
             <th>
-                Uzmērīšanas datums
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.SurveyDate)
             </th>
             <th>
-                Lauksaimniecībā izmantojamā zeme
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.LArea)
             </th>
             <th>
-                Meža zeme
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.MArea)
             </th>
             <th>
-                Purvs
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.PArea)
             </th>
             <th>
-                Ūdens objektu zeme
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.UArea)
             </th>
             <th>
-                Zeme zem ēkām un pagalmiem
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.EkPaArea)
             </th>
             <th>
-                Zeme zem ceļiem
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.CeluArea)
             </th>
             <th>
-                Pārējā zeme
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.ParejaArea)
             </th>
-            
         </tr>
         </thead>
         <tbody>
@@ -57,39 +56,40 @@
         {
             <tr>
                 <td width="10%">
-                    @obj.UnitNumber
+                    @Html.DisplayFor(m => obj.UnitNumber)
                 </td>
                 <td width="10%">
-                    @obj.Area
+                    @Html.DisplayFor(m => obj.Area)
                 </td>
                 <td width="10%">
+                    @*@Html.DisplayFor(m => obj.SurveyDate.ToString("d"))*@
                     @obj.SurveyDate.ToString("d")
                 </td>
                 <td width="10%">
-                    @obj.LArea
+                    @Html.DisplayFor(m => obj.LArea)
                 </td>
                 <td width="10%">
-                    @obj.MArea
+                    @Html.DisplayFor(m => obj.MArea)
                 </td>
                 <td width="10%">
-                    @obj.PArea
+                    @Html.DisplayFor(m => obj.PArea)
                 </td>
                 <td width="10%">
-                    @obj.UArea
+                    @Html.DisplayFor(m => obj.UArea)
                 </td>
                 <td width="10%">
-                    @obj.EkPaArea
+                    @Html.DisplayFor(m => obj.EkPaArea)
                 </td>
                 <td width="10%">
-                    @obj.CeluArea
+                    @Html.DisplayFor(m => obj.CeluArea)
                 </td>
                 <td width="10%">
-                    @obj.ParejaArea
+                    @Html.DisplayFor(m => obj.ParejaArea)
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-contoller="Property" asp-action="Edit" asp-route-id="@obj.UnitId"
-                           class="btn btn-secondary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
+                        <a href="@Url.Action("Edit", "Unit", new {id = obj.UnitId})" 
+                           class="btn mx-2" style="background-color: #e6c371"><i class="bi bi-pencil-square"></i>Labot</a>
                     </div>
                 </td>
             </tr>

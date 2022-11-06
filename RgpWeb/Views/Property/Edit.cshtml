@@ -1,42 +1,46 @@
 ﻿@using RgpWeb.Enums
 @model Property
+@{
+    ViewData["Title"] = "Īpašumi";
+}
 
-<form method="post">
+@using (Html.BeginForm("Edit", "Property"))
+{
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Labot zemes īpašuma datus</h2>
-            <hr/>
+            <h2 class="text-primary">Labot īpašuma @Model.Title datus</h2>
+            <br/>
         </div>
         <div class="mb-3">
-            <label asp-for="Title">Nosaukums</label>
-            <input asp-for="Title" class="form-control"/>
-            <span asp-validation-for="Title" class="text-danger"></span>
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
         </div>
         <div class="mb-3">
-            <label asp-for="PropertyNumber">Kadastra Nr.</label>
-            <input asp-for="PropertyNumber" class="form-control"/>
-            <span asp-validation-for="PropertyNumber" class="text-danger"></span>
+            @Html.LabelFor(m => m.PropertyNumber)
+            @Html.TextBoxFor(m => m.PropertyNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PropertyNumber, null, new { @class = "text-danger" })
         </div>
         <div class="mb-3">
-            <label asp-for="PropertyStatus">Tips</label>
-            @Html.DropDownListFor(m => m.PropertyStatus, 
-                new SelectList(Enum.GetValues(typeof(PropertyStatus))), 
+            @Html.LabelFor(m => m.PropertyStatus)
+            @Html.DropDownListFor(m => m.PropertyStatus,
+                new SelectList(Enum.GetValues(typeof(PropertyStatus))),
                 "Izvēlēties",
-                new {@class = "form-control"})
-            <span asp-validation-for="PropertyStatus" class="text-danger"></span>
+                new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PropertyStatus, null, new { @class = "text-danger" })
         </div>
         @Html.HiddenFor(p => p.Owner.Id)
         @Html.HiddenFor(p => p.Owner.FullName)
         @Html.HiddenFor(p => p.Owner.OwnerType)
         @Html.HiddenFor(p => p.Owner.RegNumber)
         <br/>
-        <button type="submit" class="btn btn-primary" style="width: 150px" >Labot</button>
-        <a asp-controller="Property" asp-action="Index" class="btn btn-secondary" asp-route-id="@Model.Id" style="width: 150px">Atgriezties</a>
+            <button type="submit" class="btn" style="width: 150px; background-color: #e6c371">Labot</button>
+        <a href="@Url.Action("Index", "Property", new {id = Model.Id})" class="btn btn-success" style="width: 150px">Atgriezties</a>
     </div>
-</form>
+}
 
 @section Scripts{
     @{
-        <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial"/>
     }
     }

@@ -7,19 +7,29 @@ namespace RgpWeb.Models
         public int OwnerId { get; set; }
         public int PropertyId { get; set; }
         public int UnitId { get; set; }
+        [Display(Name = "Kadastra apzīmējums")]
         [Required(ErrorMessage = "Lauks ir obligāts")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "Jābūt 11 cipariem")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Atļauti tikai cipari")]
         public string UnitNumber { get; set; }
+        [Display(Name = "Uzmērīšanas datums")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime SurveyDate { get; set; }
+        [Display(Name = "Kopplatība, ha")]
         public double Area { get; set; }
+        [Display(Name = "Lauksaimniecībā izmantojamā zeme, ha")]
         public double? LArea { get; set; }
+        [Display(Name = "Meža zeme, ha")]
         public double? MArea { get; set; }
+        [Display(Name = "Purvs, ha")]
         public double? PArea { get; set; }
+        [Display(Name = "Ūdens objektu zeme, ha")]
         public double? UArea { get; set; }
+        [Display(Name = "Zeme zem ēkām un pagalmiem, ha")]
         public double? EkPaArea { get; set; }
+        [Display(Name = "Zeme zem ceļiem, ha")]
         public double? CeluArea { get; set; }
+        [Display(Name = "Pārējā zeme, ha")]
         public double? ParejaArea { get; set; }
     }
 }

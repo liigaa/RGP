@@ -2,7 +2,6 @@
 using RgpWeb.Enums;
 using RgpWeb.Models;
 using RgpWeb.ServiceInterfaces;
-using RgpWeb.Services;
 
 namespace RgpWeb.Controllers
 {
@@ -26,6 +25,7 @@ namespace RgpWeb.Controllers
         public IActionResult Index(int id)
         {
             var unitObj = _unitService.UnitsWithPropertyId(id);
+
             return View(unitObj);
         }
 
@@ -40,6 +40,7 @@ namespace RgpWeb.Controllers
                 PropertyId = id,
                 PropertyName = property.Title
             };
+
             return View(model);
         }
 
@@ -61,13 +62,14 @@ namespace RgpWeb.Controllers
 
             _unitService.Create(unit);
 
-            return RedirectToAction("Index", "Unit", new { @id = createUnitRequest.PropertyId });
+            return RedirectToAction("Index", "Unit", new { id = createUnitRequest.PropertyId });
         }
 
         //GET
         public IActionResult Edit(int id)
         {
             var objUnit = _unitService.GetUnitListModelByUnitId(id);
+
             return View(objUnit);
         }
 
@@ -76,6 +78,8 @@ namespace RgpWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UnitListModel unitListModel)
         {
+            double totalTypeUseArea = 0;
+
             if (!ModelState.IsValid) return View(unitListModel);
 
             var unit = new Unit
@@ -95,72 +99,134 @@ namespace RgpWeb.Controllers
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.LauksaimniecibasZeme,
-                TypeArea = (double)unitListModel.LArea
+                TypeArea = unitListModel.LArea ?? 0
             };
+            totalTypeUseArea += unitListModel.LArea ?? 0;
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeL);
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeL);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypeM = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.Mezs,
-                TypeArea = (double)unitListModel.MArea
+                TypeArea = unitListModel.MArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeM);
+            totalTypeUseArea += unitListModel.MArea ?? 0;
+
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeM);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypeP = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.Purvs,
-                TypeArea = (double)unitListModel.PArea
+                TypeArea = unitListModel.PArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeP);
+            totalTypeUseArea += unitListModel.PArea ?? 0;
+
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeP);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypeU = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.ZemUdeniem,
-                TypeArea = (double)unitListModel.UArea
+                TypeArea = unitListModel.UArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeU);
+            totalTypeUseArea += unitListModel.UArea ?? 0;
+
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeU);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypeEkPa = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.ZemEkam,
-                TypeArea = (double)unitListModel.EkPaArea
+                TypeArea = unitListModel.EkPaArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeEkPa);
+            totalTypeUseArea += unitListModel.EkPaArea ?? 0;
+
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeEkPa);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypeCeliem = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.ZemCeliem,
-                TypeArea = (double)unitListModel.CeluArea
+                TypeArea = unitListModel.CeluArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeCeliem);
+            totalTypeUseArea += unitListModel.CeluArea ?? 0;
+
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeCeliem);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
 
             var unitUseTypePareja = new UnitUseTypes
             {
                 Owner = _ownerService.GetById(unitListModel.OwnerId),
                 Unit = unit,
                 LandType = LandTypeEnum.Pareja,
-                TypeArea = (double)unitListModel.ParejaArea
+                TypeArea = unitListModel.ParejaArea ?? 0
             };
 
-            _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypePareja);
+            totalTypeUseArea += unitListModel.ParejaArea ?? 0;
 
-            return RedirectToAction("Index", new { unitListModel.PropertyId});
+            if (totalTypeUseArea <= unitListModel.Area)
+            {
+                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypePareja);
+            }
+            else
+            {
+                return View(unitListModel);
+            }
+
+            return RedirectToAction("Index", new {id = unitListModel.PropertyId});
         }
     }
 }

@@ -17,19 +17,19 @@
     </div>
     <br/> <br/>
 
-
     <table class="table table-bordered table-striped" style="width: 100%">
         <thead>
         <tr>
             <th>
-                Nosaukums
+                @Html.DisplayNameFor(model => model.Properties.GetEnumerator().Current.Title)
             </th>
             <th class="text-center">
-                Kadastra numurs
+                @Html.DisplayNameFor(model => model.Properties.GetEnumerator().Current.PropertyNumber)  
             </th>
             <th>
-                Status
+                @Html.DisplayNameFor(model => model.Properties.GetEnumerator().Current.PropertyStatus)
             </th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
@@ -39,24 +39,24 @@
             <tr>
                 @Html.HiddenFor(p => obj.Owner.Id)
                 <td width="15%">
-                    @obj.Title
+                    @Html.DisplayFor(p => obj.Title)
                 </td>
                 <td width="25%" class="text-center">
-                    @obj.PropertyNumber
+                    @Html.DisplayFor(p => obj.PropertyNumber)
                 </td>
                 <td width="30%">
                     @Html.DisplayFor(p => obj.PropertyStatus)
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-contoller="Property" asp-action="Edit" asp-route-id="@obj.Id"
-                           class="btn btn-secondary mx-2"><i class="bi bi-pencil-square"></i>Labot</a>
+                        <a href="@Url.Action("Edit", "Property", new {id = obj.Id})"
+                           class="btn mx-2" style="background-color: #e6c371"><i class="bi bi-pencil-square"></i>Labot</a>
                     </div>
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-contoller="Property" asp-action="Redirect" asp-route-id="@obj.Id"
-                           class="btn btn-info mx-2"><i class="bi bi-eye"></i>Skatīt</a>
+                        <a href="@Url.Action("Redirect", "Property", new {id = obj.Id})"
+                           class="btn mx-2" style="background-color: #95bab8"><i class="bi bi-list"></i>Skatīt</a>
                     </div>
                 </td>
             </tr>
