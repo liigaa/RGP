@@ -36,6 +36,8 @@ namespace RgpWeb.Controllers
 
             _ownerService.Create(owner);
 
+            TempData["success"] = "Zemes īpšnieks pievienots";
+
             return RedirectToAction("Index");
         }
 
@@ -55,6 +57,7 @@ namespace RgpWeb.Controllers
 
             _ownerService.Update(owner);
 
+            TempData["success"] = "Zemes īpšnieka dati laboti";
             return RedirectToAction("Index");
         }
 

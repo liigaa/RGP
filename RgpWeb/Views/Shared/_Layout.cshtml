@@ -6,7 +6,8 @@
     <title>@ViewData["Title"] - RgpWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/bootswatchTheme.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RgpWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body style="background-color: #c7fcc1">
@@ -25,27 +26,21 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Owner" asp-action="Index">Īpašnieki</a>
                     </li>
-                    @*<li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Unit" asp-action="Index">Vienības</a>
-                    </li>*@
                 </ul>
-                @*<form class="d-flex">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>*@
             </div>
         </div>
     </nav>
 </header>
     <div class="container" style="padding-bottom: 60px">
         <main role="main" class="pb-3">
+            <partial name="_Notification"/>
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted" style="bottom: 0; position: fixed; width: 100%; background-color: #a4f2a2; text-align: left">
         <div class="container" >
-            &copy; 2022 - RgpWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-dark">Privacy</a>
+            &copy; 2022 - Zemes īpašnieki - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-dark">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

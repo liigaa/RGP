@@ -62,6 +62,8 @@ namespace RgpWeb.Controllers
 
             _unitService.Create(unit);
 
+            TempData["success"] = "Zemes vienība pievienota";
+
             return RedirectToAction("Index", "Unit", new { id = createUnitRequest.PropertyId });
         }
 
@@ -233,6 +235,8 @@ namespace RgpWeb.Controllers
                 ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
+
+            TempData["success"] = "Zemes vienības dati laboti";
 
             return RedirectToAction("Index", new {id = unitListModel.PropertyId});
         }
