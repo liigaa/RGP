@@ -12,8 +12,19 @@ namespace RgpWeb.Models
         public double Area { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Lauks ir obligāts")]
+        [DataValidation(ErrorMessage = "Datums nevar būt nākotnē")]
         public DateTime SurveyDate { get; set; }
         public Property Property { get; set; }
         public Owner Owner { get; set; }
+    }
+
+    public class DataValidation : ValidationAttribute
+    {
+        public override bool IsValid(object? value)
+        {
+            DateTime todayDate = Convert.ToDateTime(value);
+
+            return todayDate <= DateTime.Now;
+        }
     }
 }
