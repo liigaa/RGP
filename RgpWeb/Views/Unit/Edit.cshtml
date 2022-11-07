@@ -1,6 +1,7 @@
 ﻿@model UnitListModel
 @{
     ViewData["Title"] = "Vienības";
+    
 }
 
 @using (Html.BeginForm("Edit", "Unit"))
@@ -19,6 +20,7 @@
             @Html.LabelFor(m => m.Area)
             @Html.TextBoxFor(m => m.Area, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Area, null, new { @class = "text-danger" })
+            @Html.ValidationMessage("Error", new {@class = "text-danger"})
         </div>
         <div class="mb-3">
             @Html.LabelFor(m => m.SurveyDate)

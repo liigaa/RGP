@@ -78,6 +78,7 @@ namespace RgpWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UnitListModel unitListModel)
         {
+            ViewBag.Error = TempData["error"];
             double totalTypeUseArea = 0;
 
             if (!ModelState.IsValid) return View(unitListModel);
@@ -109,6 +110,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error","Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -128,6 +130,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -147,6 +150,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -166,6 +170,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -185,6 +190,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -204,6 +210,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 
@@ -223,6 +230,7 @@ namespace RgpWeb.Controllers
             }
             else
             {
+                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);
             }
 

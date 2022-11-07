@@ -14,16 +14,16 @@ namespace RgpWeb.Services
 
         public void UpdateOrAddUnitUseType(UnitUseTypes type)
         {
-            var unit = _context.UnitUseTypes
+            var unitUseType = _context.UnitUseTypes
                 .Include(u => u.Owner)
                 .Include(u => u.Unit)
                 .SingleOrDefault(u => u.LandType == type.LandType && u.Unit.Id == type.Unit.Id);
 
-            if (unit != null)
+            if (unitUseType != null)
             {
-                unit.TypeArea = type.TypeArea;
+                unitUseType.TypeArea = type.TypeArea;
 
-                Update(unit);
+                Update(unitUseType);
             }
             else
             {

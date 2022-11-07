@@ -23,10 +23,11 @@
         </div>
         <div class="mb-3">
             @Html.LabelFor(m => m.OwnerType)
-            @Html.DropDownListFor(m => m.OwnerType,
-                new SelectList(Enum.GetValues(typeof(OwnerType))),
-                "Izvēlēties",
-                new { @class = "form-control" })
+            <select asp-for="OwnerType"
+                    class="form-control"
+                    asp-items="Html.GetEnumSelectList<OwnerType>()">
+                <option>--Izvēlēties--</option>
+            </select>       
             @Html.ValidationMessageFor(m => m.OwnerType, null, new { @class = "text-danger" })
         </div>
         <br/>

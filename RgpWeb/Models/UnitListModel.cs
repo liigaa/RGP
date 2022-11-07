@@ -14,8 +14,10 @@ namespace RgpWeb.Models
         public string UnitNumber { get; set; }
         [Display(Name = "Uzmērīšanas datums")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Lauks ir obligāts")]
         public DateTime SurveyDate { get; set; }
         [Display(Name = "Kopplatība, ha")]
+        [Required(ErrorMessage = "Lauks ir obligāts")]
         public double Area { get; set; }
         [Display(Name = "Lauksaimniecībā izmantojamā zeme, ha")]
         public double? LArea { get; set; }
