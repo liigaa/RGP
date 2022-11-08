@@ -20,7 +20,7 @@ namespace RgpWeb.Services
             {
                 var area = _context.Units.Where(unit => unit.Owner.Id == owner.Id).Sum(unit => unit.Area);
 
-                userListWithArea.Add(new OwnerRequestModel(owner.Id, owner.FullName, area));
+                userListWithArea.Add(new OwnerRequestModel(owner.Id, owner.FullName, owner.RegNumber, owner.OwnerType, area));
             }
 
             return userListWithArea.OrderBy(user => user.OwnerName);

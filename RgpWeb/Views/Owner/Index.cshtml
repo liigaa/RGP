@@ -25,33 +25,47 @@
             @Html.DisplayNameFor(model => model.OwnerName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.RegNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerType)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LandArea)
         </th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     @foreach (var obj in Model)
     {
         <tr>
-            <td width="30%">
+            <td width="15%">
                 @Html.DisplayFor(m => obj.OwnerName)
             </td>
-            <td width="30%">
+            <td width="15%">
+                @Html.DisplayFor(m => obj.RegNumber)
+            </td>
+            <td width="15%">
+                @Html.DisplayFor(m => obj.OwnerType)
+            </td>
+            <td width="15%">
                 @Html.DisplayFor(m => obj.LandArea)
             </td>
-            <td>
+            <td width="15%">
                 <div class="w-75 btn-group" role="group">
                     <a href="@Url.Action("Edit", "Owner", new {id = obj.Id})"
                        class="btn mx-2" style="background-color: #e6c371"><i class="bi bi-pencil-square"></i>Labot</a>
                 </div>
             </td>
-            <td>
+            <td width="15%">
                 <div class="w-75 btn-group" role="group">
                     <a href="@Url.Action("Redirect", "Owner", new {id = obj.Id})"
                        class="btn btn-info mx-2" style="background-color: #95bab8; border: none"><i class="bi bi-list"></i>Skatīt</a>
                 </div>
             </td>
-            </tr>
+        </tr>
     }
     </tbody>
 </table>

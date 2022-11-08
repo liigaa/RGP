@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RgpWeb.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace RgpWeb.Models
 {
@@ -7,13 +8,19 @@ namespace RgpWeb.Models
         public int Id { get; set; }
         [Display(Name = "Vārds Uzvārds/Nosaukums")]
         public string OwnerName { get; set; }
+        [Display(Name = "Personas kods/ Reģistrācijas Nr.")]
+        public string RegNumber { get; set; }
+        [Display(Name = "Tips")]
+        public OwnerType OwnerType { get; set; }
         [Display(Name = "Īpašuma kopplatība, ha")]
         public double LandArea { get; set; }
 
-        public OwnerRequestModel(int id, string ownerName, double landArea)
+        public OwnerRequestModel(int id, string ownerName, string regNumber, OwnerType ownerType, double landArea)
         {
             Id = id;
             OwnerName = ownerName;
+            RegNumber = regNumber;
+            OwnerType = ownerType;
             LandArea = landArea;
         }
     }
