@@ -13,7 +13,6 @@ namespace RgpWeb.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Atļauti tikai cipari")]
         public string UnitNumber { get; set; }
         [Display(Name = "Uzmērīšanas datums")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Lauks ir obligāts")]
         [DataValidation(ErrorMessage = "Datums nevar būt nākotnē")]
         public DateTime SurveyDate { get; set; }
