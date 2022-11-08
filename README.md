@@ -1,5 +1,5 @@
 # Land Owner Database
-# Description
+## Description
 
 This is technical task for company Sia "RGP". It is Web MVC project where can find:
 * Land Owners part where can add new land owner or update land owner data
@@ -8,7 +8,7 @@ This is technical task for company Sia "RGP". It is Web MVC project where can fi
 
 Database has been created with Code First approach
 
-# Install
+## Install
 
 * Clone this reposotory on your computer or download it as a .zip file and unarchive it;
 * Open project in Visual Studio 2022 and ont the top left of the taskbar select View > Other Window > Package manager Console:
@@ -18,7 +18,7 @@ Database has been created with Code First approach
 * Inside console write `update-database`;
 * Start the project :)
 
-#Usage
+## Usage
 
 * Home page => 1. Go to land owner database
 
@@ -36,16 +36,16 @@ Database has been created with Code First approach
 
 <img src="./img/unit_view.png"/>
 
-* In the unit edit view can udate unit data and add unit land use type areas(1); 2. Confirm update 3. Return to unit view
+* In the unit edit view can update unit data and add unit land use type areas(1); 2. Confirm update 3. Return to unit view
 
 <img src="./img/unit_edit_view.png"/>
 
-#Technologies used
+## Technologies used
 
 * ASP.NET Core Web MVC;
 * Entity Framework (core, SQLServer, tools)
 
-# Further updates
+## Further updates
 
 If I had more time for this project, I would:
 * Add search for incomplete data - owners without properies, properties without units, units without land use type areas
