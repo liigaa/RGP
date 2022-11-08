@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RgpWeb.Data;
 using RgpWeb.Enums;
+using RgpWeb.Migrations;
 using RgpWeb.Models;
 using RgpWeb.ServiceInterfaces;
 
@@ -9,6 +10,7 @@ namespace RgpWeb.Services
     public class UnitService : EntityService<Unit>, IUnitService
     {
         private readonly IPropertyService _propertyService;
+        
         public UnitService(IAppDbContext context) : base(context)
         {
             _propertyService = new PropertyService(context);
@@ -117,7 +119,6 @@ namespace RgpWeb.Services
                     FirstOrDefault(u => u.Unit.Id == unit.Id && u.LandType == LandTypeEnum.Pareja)
                     ?.TypeArea
             };
-
         }
     }
 }

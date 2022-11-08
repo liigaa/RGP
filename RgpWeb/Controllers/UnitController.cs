@@ -81,156 +81,20 @@ namespace RgpWeb.Controllers
         public IActionResult Edit(UnitListModel unitListModel)
         {
             ViewBag.Error = TempData["error"];
-            double totalTypeUseArea = 0;
 
             if (!ModelState.IsValid) return View(unitListModel);
 
-            var unit = new Unit
-            {
-                Id = unitListModel.UnitId,
-                UnitNumber = unitListModel.UnitNumber,
-                Area = unitListModel.Area,
-                SurveyDate = unitListModel.SurveyDate,
-                Property = _propertyService.GetById(unitListModel.PropertyId),
-                Owner = _ownerService.GetById(unitListModel.OwnerId)
-            };
+            var unit = _unitService.GetAllUnitById(unitListModel.UnitId);
+
+            unit.UnitNumber = unitListModel.UnitNumber;
+            unit.Area = unitListModel.Area;
+            unit.SurveyDate = unitListModel.SurveyDate;
 
             _unitService.Update(unit);
 
-            var unitUseTypeL = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.LauksaimniecibasZeme,
-                TypeArea = unitListModel.LArea ?? 0
-            };
-            totalTypeUseArea += unitListModel.LArea ?? 0;
+            var isUnitUseTypesValid = _unitUseTypesService.IsLandTypeValid(unitListModel, unit);
 
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeL);
-            }
-            else
-            {
-                ModelState.AddModelError("Error","Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypeM = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.Mezs,
-                TypeArea = unitListModel.MArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.MArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeM);
-            }
-            else
-            {
-                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypeP = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.Purvs,
-                TypeArea = unitListModel.PArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.PArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeP);
-            }
-            else
-            {
-                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypeU = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.ZemUdeniem,
-                TypeArea = unitListModel.UArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.UArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeU);
-            }
-            else
-            {
-                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypeEkPa = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.ZemEkam,
-                TypeArea = unitListModel.EkPaArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.EkPaArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeEkPa);
-            }
-            else
-            {
-                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypeCeliem = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.ZemCeliem,
-                TypeArea = unitListModel.CeluArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.CeluArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypeCeliem);
-            }
-            else
-            {
-                ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
-                return View(unitListModel);
-            }
-
-            var unitUseTypePareja = new UnitUseTypes
-            {
-                Owner = _ownerService.GetById(unitListModel.OwnerId),
-                Unit = unit,
-                LandType = LandTypeEnum.Pareja,
-                TypeArea = unitListModel.ParejaArea ?? 0
-            };
-
-            totalTypeUseArea += unitListModel.ParejaArea ?? 0;
-
-            if (totalTypeUseArea <= unitListModel.Area)
-            {
-                _unitUseTypesService.UpdateOrAddUnitUseType(unitUseTypePareja);
-            }
-            else
+            if (!isUnitUseTypesValid)
             {
                 ModelState.AddModelError("Error", "Kopējā zemes lietojumu sadalījumu platība ir lielāka kā kopējā platība");
                 return View(unitListModel);

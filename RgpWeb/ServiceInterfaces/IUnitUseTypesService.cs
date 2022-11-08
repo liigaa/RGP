@@ -4,5 +4,5 @@ namespace RgpWeb.ServiceInterfaces;
 
 public interface IUnitUseTypesService
 {
-    void UpdateOrAddUnitUseType(UnitUseTypes type);
+    bool IsLandTypeValid(UnitListModel unitListModel, Unit unit);
 }
