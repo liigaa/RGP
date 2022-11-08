@@ -36,7 +36,7 @@
         @Html.HiddenFor(p => p.Owner.RegNumber)
         <br/>
             <button type="submit" class="btn" style="width: 150px; background-color: #e6c371">Labot</button>
-        <a href="@Url.Action("Index", "Property", new {id = Model.Id})" class="btn btn-success" style="width: 150px">Atgriezties</a>
+        <a href="@Url.Action("Index", "Property", new {id = Model.Owner.Id})" class="btn btn-success" style="width: 150px">Atgriezties</a>
     </div>
 }
 

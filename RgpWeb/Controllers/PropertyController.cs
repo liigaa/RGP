@@ -50,7 +50,7 @@ namespace RgpWeb.Controllers
 
             TempData["success"] = "Zemes īpašums pievienots";
 
-            return RedirectToAction("Index", "Property", new {@id = createPropertyRequest.OwnerId});
+            return RedirectToAction("Index", "Property", new {id = createPropertyRequest.OwnerId});
         }
 
         //GET
@@ -71,7 +71,7 @@ namespace RgpWeb.Controllers
 
             TempData["success"] = "Zemes īpašuma dati laboti";
 
-            return RedirectToAction("Index", new {property.Owner.Id});
+            return RedirectToAction("Index", new {id = property.Owner.Id});
         }
 
         //GET
