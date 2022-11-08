@@ -1,0 +1,107 @@
+﻿@model UnitViewModel
+@{
+    ViewData["Title"] = "Vienības";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Īpašuma @Model.PropertyName zemes vienības</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Create", "Unit", new {id = Model.PropertyId})"  class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;
+                Pievienot zemes vienību
+            </a>
+        </div>
+    </div>
+    <br/>
+    <table class="table table-bordered table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.UnitNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.SurveyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.LArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.MArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.PArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.UArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.EkPaArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.CeluArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitList.GetEnumerator().Current.ParejaArea)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var obj in Model.UnitList)
+        {
+            <tr>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.UnitNumber)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.Area)
+                </td>
+                <td width="10%">
+                    @obj.SurveyDate.ToString("d")
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.LArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.MArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.PArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.UArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.EkPaArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.CeluArea)
+                </td>
+                <td width="10%">
+                    @Html.DisplayFor(m => obj.ParejaArea)
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a href="@Url.Action("Edit", "Unit", new {id = obj.UnitId})" 
+                           class="btn mx-2" style="background-color: #e6c371"><i class="bi bi-pencil-square"></i>Labot</a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="row pt-4">
+        <div class="col-6 text-end">
+            <a href="@Url.Action("Index", "Property", new {id = Model.OwnerId})"  class="btn btn-success">
+                Atgriezties
+            </a>
+        </div>
+        <div class="col-6"></div>
+    </div>
+</div>

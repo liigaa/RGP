@@ -1,0 +1,44 @@
+﻿@model CreateUnitViewModel
+@{
+    ViewData["Title"] = "Vienības";
+}
+
+@using (Html.BeginForm("Create", "Unit"))
+{
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Pievienot īpašumam @Model.PropertyName zemes vienību</h2>
+            <hr/>
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.UnitNumber)
+            @Html.TextBoxFor(m => m.UnitNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UnitNumber, null, new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Area)
+            @Html.TextBoxFor(m => m.Area, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Area, null, new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+
+            @Html.LabelFor(m => m.SurveyDate)
+            @Html.TextBoxFor(m => m.SurveyDate,
+                new { @type = "date", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.SurveyDate, "", new { @class = "text-danger" })
+        </div>
+        @Html.HiddenFor(m => m.OwnerId)
+        @Html.HiddenFor(m => m.PropertyId)
+        @Html.HiddenFor(m => m.PropertyName)
+        <br/>
+            <button type="submit" class="btn" style="width: 150px; background-color: #e6c371">Pievienot</button>
+        <a href="@Url.Action("Index", "Unit", new {id = Model.PropertyId})" class="btn btn-success" style="width: 150px">Atgriezties</a>
+    </div>
+}
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
+

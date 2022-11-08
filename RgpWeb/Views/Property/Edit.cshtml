@@ -1,0 +1,47 @@
+﻿@using RgpWeb.Enums
+@model Property
+@{
+    ViewData["Title"] = "Īpašumi";
+}
+
+@using (Html.BeginForm("Edit", "Property"))
+{
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Labot īpašuma @Model.Title datus</h2>
+            <br/>
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.PropertyNumber)
+            @Html.TextBoxFor(m => m.PropertyNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PropertyNumber, null, new { @class = "text-danger" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(m => m.PropertyStatus)
+            <select asp-for="PropertyStatus"
+                    class="form-control"
+                    asp-items="Html.GetEnumSelectList<PropertyStatus>()">
+                <option>--Izvēlēties--</option>
+            </select>
+            @Html.ValidationMessageFor(m => m.PropertyStatus, null, new { @class = "text-danger" })
+        </div>
+        @Html.HiddenFor(p => p.Owner.Id)
+        @Html.HiddenFor(p => p.Owner.FullName)
+        @Html.HiddenFor(p => p.Owner.OwnerType)
+        @Html.HiddenFor(p => p.Owner.RegNumber)
+        <br/>
+            <button type="submit" class="btn" style="width: 150px; background-color: #e6c371">Labot</button>
+        <a href="@Url.Action("Index", "Property", new {id = Model.Owner.Id})" class="btn btn-success" style="width: 150px">Atgriezties</a>
+    </div>
+}
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+    }
