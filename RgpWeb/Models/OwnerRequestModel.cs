@@ -14,14 +14,17 @@ namespace RgpWeb.Models
         public OwnerType OwnerType { get; set; }
         [Display(Name = "Īpašuma kopplatība, ha")]
         public double LandArea { get; set; }
+        [Display(Name = "Īpašumu skaits")]
+        public int PropertyCount { get; set; }
 
-        public OwnerRequestModel(int id, string ownerName, string regNumber, OwnerType ownerType, double landArea)
+        public OwnerRequestModel(int id, string ownerName, string regNumber, OwnerType ownerType, double landArea, int propertyCount)
         {
             Id = id;
             OwnerName = ownerName;
             RegNumber = regNumber;
             OwnerType = ownerType;
             LandArea = landArea;
+            PropertyCount = propertyCount;
         }
     }
 }
